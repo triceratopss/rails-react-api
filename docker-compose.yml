@@ -1,0 +1,50 @@
+version: "3"
+services:
+  frontend:
+    build: ./frontend
+    container_name: "rails-react-api-frontend"
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+    networks:
+      - rails-react-api-net
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: "rails-react-api-backend"
+    depends_on:
+      - db
+    command: rails s -p 3001 -b '0.0.0.0'
+    volumes:
+      - ./backend:/app
+    ports:
+      - 3001:3001
+    networks:
+      - rails-react-api-net
+
+    tty: true
+    stdin_open: true
+    restart: always
+
+  db:
+    image: mysql:5.7
+    container_name: "rails-react-api-db"
+    platform: linux/amd64
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db-volume:/var/lib/mysql
+    networks:
+      - rails-react-api-net
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+
+volumes:
+  db-volume:
+
+networks:
+  rails-react-api-net:
