@@ -23,7 +23,7 @@ COPY . /app
 # # コンテナ起動時に実行させるスクリプトを追加
 # COPY entrypoint.sh /usr/bin/
 # RUN chmod +x /usr/bin/entrypoint.sh
-# ENTRYPOINT ["entrypoint.sh"]
+# ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 # EXPOSE 3001
 
 # # Rails サーバ起動

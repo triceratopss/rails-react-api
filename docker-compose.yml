@@ -2,8 +2,8 @@ version: "3"
 services:
   web:
     build: .
-    # 毎回 rm tmp/pids/server.pid するのも手間であるため、・事前に手元で/tmp/pids/server.pidを削除する
-    # command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    container_name: "rails-react-api-web"
+    command: rails s -p 3001 -b '0.0.0.0'
     volumes:
       - .:/app
     ports:
@@ -15,8 +15,9 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: "rails-react-api-db"
     platform: linux/amd64
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - db-volume:/var/lib/mysql
     environment:
