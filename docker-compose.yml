@@ -41,7 +41,8 @@ services:
       MYSQL_ROOT_PASSWORD: password
       TZ: "Asia/Tokyo"
     ports:
-      - "3306:3306"
+      - "13306:3306"
+    restart: always
 
 volumes:
   db-volume:
