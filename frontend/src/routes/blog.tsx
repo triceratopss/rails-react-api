@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 
-function App() {
+function Blog() {
   return (
     <div style={{ margin: 'auto', width: '1000px' }}>
-      <h1>ブログアプリ</h1>
+      <h1>ブログ詳細画面</h1>
+      <div>
+        <Link to="/">TOP</Link>
+      </div>
       <div>
         <Link to="/create">記事作成画面</Link>
       </div>
@@ -14,4 +17,4 @@ function App() {
   )
 }
 
-export default App
+export default Blog
