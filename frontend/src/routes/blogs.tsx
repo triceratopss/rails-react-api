@@ -1,6 +1,24 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { axiosInstance } from '../utils/axios.js'
+
+interface blog {
+  id: number
+  title: string
+  contents: string
+}
 
 function Blogs() {
+  const [blogs, setBlogs] = useState<Array<blog>>()
+
+  useEffect(() => {
+    const f = async () => {
+      const res = await axiosInstance.get('/blogs')
+      setBlogs(res.data)
+    }
+    f()
+  }, [])
+
   return (
     <div style={{ margin: 'auto', width: '1000px' }}>
       <h1>ブログ一覧画面</h1>
@@ -9,6 +27,16 @@ function Blogs() {
       </div>
       <div>
         <Link to="/create">記事作成画面</Link>
+      </div>
+
+      <div>
+        <ul>
+          {blogs?.map((b) => (
+            <Link to={`/blogs/${b.id}`} key={b.id}>
+              <li>{b.title}</li>
+            </Link>
+          ))}
+        </ul>
       </div>
     </div>
   )
