@@ -1,15 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { axiosInstance } from '../utils/axios.js'
-
-interface blog {
-  id: number
-  title: string
-  contents: string
-}
+import { BlogType } from '../types/blog.js'
 
 function Blogs() {
-  const [blogs, setBlogs] = useState<Array<blog>>()
+  const [blogs, setBlogs] = useState<Array<BlogType>>()
 
   useEffect(() => {
     const f = async () => {
